@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import argparse
 import re
 import requests
 import sys
@@ -20,7 +21,7 @@ class APIErrors():
 
 class SemanticMediaWiki():
 
-    def __init__(self, apiPoint):
+    def __init__(self, apiPoint=""):
 
         self.apiPoint = apiPoint
 
@@ -40,7 +41,7 @@ class SemanticMediaWiki():
         print(request.status_code)
         print(request.headers['content-type'])
 
-    def ask(self, query, format):
+    def ask(self, query, format="json"):
         print("Ask action")
 
         self.action = self.ACTIONS["ask"]
@@ -50,7 +51,7 @@ class SemanticMediaWiki():
         self.params = {
             "format": self.format,
             "query": self.query,
-            "action": self.format
+            "action": self.action
         }
 
         self.request = requests.get(self.apiPoint, params=self.params)
@@ -64,22 +65,6 @@ class SemanticMediaWiki():
             print(self.request.json()["query-continue-offset"])
         '''
 
-        print(self.request.text)
+        self.requestResult = self.request.json()
 
-
-if __name__ == "__main__":
-    apiPoint = ""
-
-    while apiPoint == "":
-        if not apiPoint:
-            apiPoint = input("Insert API URL (e. g., https://www.semantic-mediawiki.org/w/api.php): ")
-            if not apiPoint:
-                print("You didn't insert any API URL, please, insert one.")
-            else:
-                print("API URL: {}".format(apiPoint))
-
-                smw = SemanticMediaWiki(apiPoint)
-
-                query = "[[Modification date::+]]|?Modification date|sort=Modification date|order=desc"
-
-                ask = smw.ask(query, "jsonfm")
+        return self.requestResult
