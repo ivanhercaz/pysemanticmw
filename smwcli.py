@@ -12,14 +12,16 @@ def main():
     cli = {
         "desc": """Command-line interface to access to the API of a Semantic
                 MediaWiki installation. Pending to document...""",
-        "api": "access url to the API (e.g. https://semantic-mediawiki.org/w/api.php)"
+        "api": "access url to the API (e.g. https://semantic-mediawiki.org/w/api.php)",
+        "ask": "make a query in ask-language",
+        "indent": "number of indents to prettify the JSON result"
     }
     parser = argparse.ArgumentParser(
         description=cli["desc"]
     )
     parser.add_argument("-A", "--api", help=cli["api"])
-    parser.add_argument("-a", "--ask", help="make a query in ask-language")
-    parser.add_argument("-i", "--indent", help="number of indents to prettify the JSON result")
+    parser.add_argument("-a", "--ask", help=cli["ask"])
+    parser.add_argument("-i", "--indent", help=cli["indent"])
 
     args = parser.parse_args()
 
