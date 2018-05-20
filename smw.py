@@ -1,20 +1,29 @@
 # -*- coding: utf-8 -*-
 
 import argparse
+import colorama as c
 import json
 import re
 import requests
 import sys
 
+cR = c.Style.RESET_ALL
+
 
 class APIErrors():
+    def __init__(self):
+        self.errors = {
+            "apiFormat": "{}{}{} ERROR {}: API URL has bad format".format(c.Back.RED, c.Fore.WHITE, c.Style.BRIGHT, cR),
+            "type": "Type {0}python3 smwcli.py -h{1} or {0}python3 smwcli.py --help{1} to know how more about it.".format(c.Style.BRIGHT, cR)
+        }
 
     def checkAPI(self, apiPoint):
         apiPattern = re.compile("(http(s)?):\\/\\/(\\w*\\.)?(.*)(\\.\\w*)\\/w\\/api\\.php")
         apiPattern = bool(apiPattern.match(apiPoint))
 
         if apiPattern is False:
-            print("API URL has bad format. Check... [TO-DO]")
+            print(self.errors["apiFormat"])
+            print(self.errors["type"])
             sys.exit()
         else:
             pass
