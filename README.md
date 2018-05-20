@@ -24,7 +24,7 @@ In order to reach version 1.0 in a stable manner, the following must be met:
   - [ ] Documentation: docblocks in functions and comments in the code to explain it (yes, I like very much to explain the code to be easy to understand for anyone, due it has help me in the past and it could help other people).
   - [ ] Test the command client and the module, and upload it to the Python Package Index (Pypi).
 
-Check the [roadmap issue](ivanhercaz/pysemanticmw#1).
+Check the [roadmap issue](https://github.com/ivanhercaz/pysemanticmw/issues/1).
 
 ## Note
 
