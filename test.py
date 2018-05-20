@@ -18,4 +18,4 @@ query = "[[Modification date::+]]|?Modification date|sort=Modification date|orde
 
 ask = smw.ask(query)
 
-print(ask["query"]["results"]["Help:Using Elasticsearch store"])
+print(ask)

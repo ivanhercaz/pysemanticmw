@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import argparse
+import json
 import re
 import requests
 import sys
@@ -41,7 +42,7 @@ class SemanticMediaWiki():
         print(request.status_code)
         print(request.headers['content-type'])
 
-    def ask(self, query, format="json"):
+    def ask(self, query, format="json", indent=2):
         print("Ask action")
 
         self.action = self.ACTIONS["ask"]
@@ -66,5 +67,6 @@ class SemanticMediaWiki():
         '''
 
         self.requestResult = self.request.json()
+        self.requestResult = json.dumps(self.requestResult, indent=indent)
 
         return self.requestResult
