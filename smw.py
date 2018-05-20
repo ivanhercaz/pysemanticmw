@@ -17,16 +17,31 @@ class APIErrors():
             "type": "Type {0}python3 smwcli.py -h{1} or {0}python3 smwcli.py --help{1} to know how more about it.".format(c.Style.BRIGHT, cR)
         }
 
+        self.statusCode = {
+            "200": "connection established succesfully"
+        }
+
+
+    def status(self):
+        request = requests.get(self.apiPoint)
+
+        if request.status_code == 200:
+            print("{}{}{} OK {} {}: {}".format(c.Back.GREEN, c.Fore.WHITE, c.Style.BRIGHT, request.status_code, cR, self.statusCode["200"]))
+        else:
+            print("wrong")
+
+
     def checkAPI(self, apiPoint):
+        self.apiPoint = apiPoint
         apiPattern = re.compile("(http(s)?):\\/\\/(\\w*\\.)?(.*)(\\.\\w*)\\/w\\/api\\.php")
-        apiPattern = bool(apiPattern.match(apiPoint))
+        apiPattern = bool(apiPattern.match(self.apiPoint))
 
         if apiPattern is False:
             print(self.errors["apiFormat"])
             print(self.errors["type"])
             sys.exit()
         else:
-            pass
+            self.status()
 
 
 class SemanticMediaWiki():
@@ -45,11 +60,6 @@ class SemanticMediaWiki():
 
         errors = APIErrors()
         checkAPI = errors.checkAPI(self.apiPoint)
-
-        request = requests.get(self.apiPoint)
-
-        print(request.status_code)
-        print(request.headers['content-type'])
 
     def ask(self, query, format="json", indent=2):
         print("Ask action")

@@ -4,7 +4,7 @@ import argparse
 from smw import *
 
 config = {
-    "apiPoint": "asdads",
+    "apiPoint": "https://semantic-mediawiki.org/w/api.php",
 }
 
 
