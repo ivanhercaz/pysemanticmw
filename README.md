@@ -13,9 +13,18 @@ At this moment Pysemanticmw is being developed, so it is unastable and it hasn't
 
 In order to reach version 1.0 in a stable manner, the following must be met:
 
-  - A Python module with the [special actions](https://github.com/SemanticMediaWiki/SemanticMediaWiki/blob/master/docs/technical/api.md) of Semantic MediaWiki API until before the version 3.0 to build your own scripts. These actions are: `ask`, `askargs`, `smwinfo`, `browsebysubject` and `browsebyproperty`.
-  - A command client able to run the special actions mentioned above.
-  - Test the command client and the module, and upload it to the Python Package Index (Pypi).
+  - [ ] A Python module with the [special actions](https://github.com/SemanticMediaWiki/SemanticMediaWiki/blob/master/docs/technical/api.md) of Semantic MediaWiki API until before the version 3.0 to build your own scripts. These actions are:
+   - [ ] `ask`
+   - [ ] `askargs`
+   - [ ] `smwinfo`
+   - [ ] `browsebysubject`
+   - [ ] `browsebyproperty`.
+  - [ ] A command client able to run the special actions mentioned above.
+  - [ ] Specification of errors that could occur and how solve them.
+  - [ ] Documentation: docblocks in functions and comments in the code to explain it (yes, I like very much to explain the code to be easy to understand for anyone, due it has help me in the past and it could help other people).
+  - [ ] Test the command client and the module, and upload it to the Python Package Index (Pypi).
+
+Check the roadmap issue (#1)
 
 ## Note
 
