@@ -57,15 +57,6 @@ class SemanticMediaWiki():
 
         self.request = requests.get(self.apiPoint, params=self.params)
 
-        '''
-        Tests:
-            print(self.request.url)
-            print(self.request.text)
-            print("\n\n\n\n")
-            print(self.request.json())
-            print(self.request.json()["query-continue-offset"])
-        '''
-
         self.requestResult = self.request.json()
         self.requestResult = json.dumps(self.requestResult, indent=indent)
 
