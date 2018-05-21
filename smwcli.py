@@ -51,5 +51,6 @@ def main():
             ask = smw.ask(query)
             print(ask)
 
+
 if __name__ == '__main__':
     main()

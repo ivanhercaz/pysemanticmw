@@ -132,5 +132,22 @@ class SemanticMediaWiki():
 
         return self.requestResult
 
-    def askArgs(self, query):
-        print("testing")
+    def askArgs(self, conditions, printouts, parameters, format="json", indent=2):
+        self.action = self.ACTIONS["askA"]
+        self.conditions = conditions
+        self.printouts = printouts
+        self.parameters = parameters
+        self.format = format
+
+        self.params = {
+            "format": self.format,
+            "parameters": self.parameters,
+            "printouts": self.printouts,
+            "conditions": self.conditions,
+            "action": self.action
+        }
+
+        self.request = requests.get(self.apiPoint, params=self.params)
+
+        self.requestResult = self.request.json()
+        self.requestResult = json.dumps(self.requestResult, indent=indent)
