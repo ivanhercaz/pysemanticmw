@@ -131,3 +131,6 @@ class SemanticMediaWiki():
         self.requestResult = json.dumps(self.requestResult, indent=indent)
 
         return self.requestResult
+
+    def askArgs(self, query):
+        print("testing")
