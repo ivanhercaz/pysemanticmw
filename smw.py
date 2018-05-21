@@ -31,7 +31,6 @@ class APIErrors():
 
             if request.status_code == 200:
                 print("{}{}{} {} {} {}: {}".format(c.Back.GREEN, c.Fore.WHITE, c.Style.BRIGHT, request.status_code, request.reason, cR, self.info["200"]))
-                print(self.info["help"])
                 pass
             else:
                 print("Unknown status code: {}".format(request.status_code))
@@ -94,8 +93,28 @@ class SemanticMediaWiki():
         checkAPI = errors.checkAPI(self.apiPoint)
 
     def ask(self, query, format="json", indent=2):
-        print("Ask action")
+        """"ask" allow you to do ask queries via action "ask" (?action=ask) against
+        Semantic MediaWiki using the MediaWiki API and get results back serialized in
+        one of the supported formats (json, php, xml and its prettified formats).
 
+        Check https://www.semantic-mediawiki.org/wiki/Help:API:ask
+
+        Parameters
+        ----------
+        query : string
+            Semantic parameter which takes the same string of an #ask parser function
+            Check https://www.semantic-mediawiki.org/wiki/Help:Inline_queries#Parser_function_.23ask
+        format : string
+            Format in which the data is obtained
+        indent : integer
+            To beautify JSON with indents instead of getting a block without spaces.
+
+        Returns
+        -------
+        string
+            Results of the requested query to the Semantic MediaWiki installation.
+
+        """
         self.action = self.ACTIONS["ask"]
         self.query = query
         self.format = format
