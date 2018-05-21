@@ -45,10 +45,10 @@ def main():
         query = input("Insert the query: ")
         ask = smw.ask(query)
         if args.indent:
-            ask = smw.ask(args.ask, args.indent)
+            ask = smw.ask(query, args.indent)
             print(ask)
         else:
-            ask = smw.ask(args.ask)
+            ask = smw.ask(query)
             print(ask)
 
 if __name__ == '__main__':
