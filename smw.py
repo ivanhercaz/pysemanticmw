@@ -69,8 +69,8 @@ class APIErrors():
         if apiPattern is False:
             print(self.info["apiFormat"])
             print(self.info["help"])
-            # pass
-            self.status()
+
+            pass
         else:
             self.status()
 
