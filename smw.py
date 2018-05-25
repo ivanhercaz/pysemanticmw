@@ -127,10 +127,20 @@ class SemanticMediaWiki():
 
         self.request = requests.get(self.apiPoint, params=self.params)
 
-        self.requestResult = self.request.json()
-        self.requestResult = json.dumps(self.requestResult, indent=indent)
+        if self.format == "json":
+            self.requestResult = self.request.json()
+            self.requestResult = json.dumps(self.requestResult, indent=indent)
+            return self.requestResult
+        elif self.format == "jsonfm" or self.format == "rawfm":
+            print("Format {} not supported yet, check issue #2 in GitHub:".format(self.params["format"]))
+            print(" https://github.com/ivanhercaz/pysemanticmw/issues/2")
 
-        return self.requestResult
+            sys.exit()
+        elif self.format == "xml" or self.format == "php" or "xmlfm" or "phpfm":
+            print("Format {} has been deprecated, check the MediaWiki documentation:".format(self.params["format"]))
+            print(" https://www.mediawiki.org/wiki/API:Data_formats")
+
+            sys.exit()
 
     def askArgs(self, conditions, printouts, parameters, format="json", indent=2):
         self.action = self.ACTIONS["askA"]
