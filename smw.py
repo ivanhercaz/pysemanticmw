@@ -13,8 +13,8 @@ cR = c.Style.RESET_ALL
 class APIErrors():
     def __init__(self):
         self.info = {
-            "apiFormat": "{}{}{} ERROR {}: API URL has bad format".format(c.Back.RED, c.Fore.WHITE, c.Style.BRIGHT, cR),
-            "help": "Type {0}python3 smwcli.py -h{1} or {0}python3 smwcli.py --help{1} to know how more about it.".format(c.Style.BRIGHT, cR),
+            "apiFormat": "\n{}{}{} ERROR {}: API URL has bad format".format(c.Back.RED, c.Fore.WHITE, c.Style.BRIGHT, cR),
+            "help": " Type {0}python3 smwcli.py -h{1} or {0}python3 smwcli.py --help{1} to know how more about it.".format(c.Style.BRIGHT, cR),
             "200": "connection established succesfully",
             "400": "your request cannot be processed by the server due a client error",
             "404": "the requested resourced could not be found",
@@ -92,6 +92,26 @@ class SemanticMediaWiki():
         errors = APIErrors()
         checkAPI = errors.checkAPI(self.apiPoint)
 
+    def run(self, format, result, indent):
+        if self.format == "json":
+            self.requestResult = self.request.json()
+            self.requestResult = json.dumps(self.requestResult, indent=indent)
+            return self.requestResult
+        elif self.format == "jsonfm" or self.format == "rawfm":
+            print("\n{}{}{}Format {} not supported yet{}, check issue #2 in GitHub:".format(
+                c.Back.RED, c.Fore.WHITE, c.Style.BRIGHT, self.params["format"], cR)
+            )
+            print(" https://github.com/ivanhercaz/pysemanticmw/issues/2")
+
+            sys.exit()
+        elif self.format == "xml" or self.format == "php" or "xmlfm" or "phpfm":
+            print("\n{}{}{}Format {} has been deprecated{}, check the MediaWiki documentation:".format(
+                c.Back.RED, c.Fore.WHITE, c.Style.BRIGHT, self.params["format"], cR)
+            )
+            print(" https://www.mediawiki.org/wiki/API:Data_formats")
+
+            sys.exit()
+
     def ask(self, query, format="json", indent=2):
         """"ask" allow you to do ask queries via action "ask" (?action=ask) against
         Semantic MediaWiki using the MediaWiki API and get results back serialized in
@@ -119,6 +139,8 @@ class SemanticMediaWiki():
         self.query = query
         self.format = format
 
+        self.indent = indent
+
         self.params = {
             "format": self.format,
             "query": self.query,
@@ -127,20 +149,7 @@ class SemanticMediaWiki():
 
         self.request = requests.get(self.apiPoint, params=self.params)
 
-        if self.format == "json":
-            self.requestResult = self.request.json()
-            self.requestResult = json.dumps(self.requestResult, indent=indent)
-            return self.requestResult
-        elif self.format == "jsonfm" or self.format == "rawfm":
-            print("Format {} not supported yet, check issue #2 in GitHub:".format(self.params["format"]))
-            print(" https://github.com/ivanhercaz/pysemanticmw/issues/2")
-
-            sys.exit()
-        elif self.format == "xml" or self.format == "php" or "xmlfm" or "phpfm":
-            print("Format {} has been deprecated, check the MediaWiki documentation:".format(self.params["format"]))
-            print(" https://www.mediawiki.org/wiki/API:Data_formats")
-
-            sys.exit()
+        return self.run(self.format, self.request, self.indent)
 
     def askArgs(self, conditions, printouts, parameters, format="json", indent=2):
         self.action = self.ACTIONS["askA"]
