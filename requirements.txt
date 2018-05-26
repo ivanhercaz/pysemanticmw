@@ -1,0 +1,6 @@
+argparse
+colorama
+json
+re
+requests
+sys
