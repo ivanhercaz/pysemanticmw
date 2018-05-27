@@ -143,7 +143,7 @@ class SemanticMediaWiki():
 
         self.params = {
             "format": self.format,
-            "query": self.query,
+            "query": "|".join(query),
             "action": self.action
         }
 
