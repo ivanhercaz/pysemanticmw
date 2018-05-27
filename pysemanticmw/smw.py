@@ -121,7 +121,7 @@ class SemanticMediaWiki():
 
         Parameters
         ----------
-        query : string
+        query : list
             Semantic parameter which takes the same string of an #ask parser function
             Check https://www.semantic-mediawiki.org/wiki/Help:Inline_queries#Parser_function_.23ask
         format : string
@@ -151,12 +151,14 @@ class SemanticMediaWiki():
 
         return self.run(self.format, self.request, self.indent)
 
-    def askArgs(self, conditions, printouts, parameters, format="json", indent=2):
+    def askArgs(self, query, format="json", indent=2):
         self.action = self.ACTIONS["askA"]
-        self.conditions = conditions
-        self.printouts = printouts
-        self.parameters = parameters
+        self.conditions = query["conditions"]
+        self.printouts = query["printouts"]
+        self.parameters = query["parameters"]
         self.format = format
+
+        self.indent = indent
 
         self.params = {
             "format": self.format,
@@ -168,5 +170,4 @@ class SemanticMediaWiki():
 
         self.request = requests.get(self.apiPoint, params=self.params)
 
-        self.requestResult = self.request.json()
-        self.requestResult = json.dumps(self.requestResult, indent=indent)
+        return self.run(self.format, self.request, self.indent)

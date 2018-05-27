@@ -2,27 +2,30 @@
 
 import pysemanticmw as pysmw
 
-apiPoint = ""
-'''
-while apiPoint == "":
+apiPoint = "https://sandbox.semantic-mediawiki.org/w/api.php"
+
+if not apiPoint:
+    apiPoint = input("Insert API URL (e. g., https://sandbox.semantic-mediawiki.org/w/api.php): ")
     if not apiPoint:
-        apiPoint = input("Insert API URL (e. g., https://sandbox.semantic-mediawiki.org/w/api.php): ")
-        if not apiPoint:
-            print("You didn't insert any API URL, please, insert one.")
-        else:
-            print("API URL: {}".format(apiPoint))
+        print("You didn't insert any API URL, please, insert one.")
+else:
+    print("API URL: {}".format(apiPoint))
 
-            smw = pysmw.SemanticMediaWiki(apiPoint)
+    smw = pysmw.SemanticMediaWiki(apiPoint)
 
-query = {}"[[Modification date::+]]|?Modification date|sort=Modification date|order=desc"
+query = {
+    "conditions": "Modification date::+",
+    "printouts": "Modification date",
+    "parameters": "|".join(["sort=Modification date", "order=desc"])
+}
 
-askArgs = smw.ask(query, format="json")
+askArgs = smw.askArgs(query, format="json")
 
-def askArgs(self, conditions, printouts, parameters, format="json", indent=2):
 
-print(ask)
+print(askArgs)
 
 '''
+ # ask()
 
 while apiPoint == "":
     if not apiPoint:
@@ -44,3 +47,4 @@ query = [
 ask = smw.ask(query)
 
 print(ask)
+'''
