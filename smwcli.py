@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-from smw import *
+import pysemanticmw as pysmw
 
 config = {
     "apiPoint": "https://semantic-mediawiki.org/w/api.php",
@@ -55,12 +55,12 @@ def main():
     query = args.query
 
     if args.api:
-        smw = SemanticMediaWiki(args.api)
+        smw = pysmw.SemanticMediaWiki(args.api)
     elif config["apiPoint"] is not "":
-        smw = SemanticMediaWiki(config["apiPoint"])
+        smw = pysmw.SemanticMediaWiki(config["apiPoint"])
     else:
         apiPoint = input("Insert the API URL of the Semantic MediaWiki you want to read: ")
-        smw = SemanticMediaWiki(apiPoint)
+        smw = pysmw.SemanticMediaWiki(apiPoint)
 
     if args.ask:
         action = "ask"
